@@ -1,0 +1,84 @@
+schema_version: 1
+project: WEAVE Example Application
+contract_file: contracts/openapi.yaml
+contract_version: 1.0.0
+contract_state: FROZEN
+
+conventions:
+  api_base_url_environment_variable: NEXT_PUBLIC_API_BASE_URL
+  api_version_prefix: /api/v1
+  request_fields: camelCase
+  client_usage: generated-client-only
+  missing_operation_behavior: BLOCKED_CONTRACT_GAP
+  contract_change_authority: main-orchestrator
+  contract_git_writer: git-manager
+
+# Values and placeholders: never store actual production secrets in this file.
+environment_variables:
+  frontend_public:
+    - name: NEXT_PUBLIC_API_BASE_URL
+      example_local_value: http://localhost:4000
+      description: Origin of API server; OpenAPI paths already include /api/v1
+  backend_private:
+    - name: DATABASE_URL
+      value_source: secret-manager
+    - name: JWT_SECRET
+      value_source: secret-manager
+
+features:
+  - feature_id: FEAT-AUTH-LOGIN
+    description: Login form authenticates against the approved auth endpoint
+    operations:
+      - operation_id: authLogin
+        method: POST
+        path: /api/v1/auth/login
+    frontend:
+      task_id: FE-001
+      owner_role: frontend-agent
+      component: LoginForm
+      source_path: frontend/src/features/auth/LoginForm.tsx
+    backend:
+      task_id: BE-001
+      owner_role: backend-agent
+      module: AuthModule
+      source_path: backend/src/modules/auth/
+    mocks_allowed_before_backend: true
+    dependency_ids: []
+    execution_start_gate: CONTRACT_APPROVED
+    live_connection_gate: BACKEND_CONTRACT_VERIFIED
+    done_gate: E2E_VERIFIED
+    tests:
+      - valid credentials return typed login response
+      - invalid credentials return documented 401 error
+      - malformed payload returns documented 422 error
+
+  - feature_id: FEAT-USER-PROFILE
+    description: Profile page reads and updates the current user's details
+    operations:
+      - operation_id: usersGetMe
+        method: GET
+        path: /api/v1/users/me
+      - operation_id: usersUpdateMe
+        method: PATCH
+        path: /api/v1/users/me
+    frontend:
+      task_id: FE-002
+      owner_role: frontend-agent
+      component: UserProfile
+      source_path: frontend/src/features/profile/UserProfile.tsx
+    backend:
+      task_id: BE-002
+      owner_role: backend-agent
+      module: UsersModule
+      source_path: backend/src/modules/users/
+    mocks_allowed_before_backend: true
+    dependency_ids:
+      - FEAT-AUTH-LOGIN
+    execution_start_gate: CONTRACT_APPROVED
+    live_connection_gate: BACKEND_CONTRACT_VERIFIED
+    done_gate: E2E_VERIFIED
+    tests:
+      - current user GET returns approved User schema
+      - profile PATCH returns updated User schema
+      - missing bearer token returns documented 401 error
+      - invalid profile data returns documented 422 error

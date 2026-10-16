@@ -1,0 +1,68 @@
+name: Smoke CI
+
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Windows Smoke CI
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Verify toolchains
+        run: |
+          rustc --version
+          cargo --version
+          node --version
+          npm --version
+
+      - name: Check Rust formatting (crates)
+        run: cargo fmt --manifest-path crates/Cargo.toml --all -- --check
+
+      - name: Run Rust clippy (crates)
+        run: cargo clippy --manifest-path crates/Cargo.toml --workspace --all-targets --locked -- -D warnings
+
+      - name: Run Rust workspace tests (crates)
+        run: cargo test --manifest-path crates/Cargo.toml --workspace --locked
+
+      - name: Install UI dependencies (packages/ui)
+        run: npm ci --prefix packages/ui
+
+      - name: Install desktop dependencies (apps/desktop)
+        run: npm ci --prefix apps/desktop
+
+      - name: Typecheck shared UI (packages/ui)
+        run: npm run typecheck --prefix packages/ui
+
+      - name: Build shared UI (packages/ui)
+        run: npm run build --prefix packages/ui
+
+      - name: Typecheck desktop frontend (apps/desktop)
+        run: npm run typecheck --prefix apps/desktop
+
+      - name: Build desktop frontend (apps/desktop)
+        run: npm run build --prefix apps/desktop
+
+      - name: Check native Tauri crate (apps/desktop/src-tauri)
+        run: cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml --locked

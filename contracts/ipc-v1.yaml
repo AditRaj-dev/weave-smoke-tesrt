@@ -1,0 +1,225 @@
+# WEAVE local IPC API v1: normative method registry for daemon/CLI/GUI.
+# Serialization: 4-byte unsigned big-endian byte length + UTF-8 JSON payload;
+# max JSON frame 1_048_576 bytes, terminal stream bytes base64 encoded in event chunks.
+# Every request: JSON-RPC 2.0 id/method/params and meta.api_version=1,
+# meta.request_id; mutation also meta.idempotency_key and expected_version when updating.
+api_version: 1
+transport:
+  windows: per_user_named_pipe
+  unix: mode_0600_unix_domain_socket
+  encoding: utf8_json
+  frame: uint32_be_length_prefix
+  max_frame_bytes: 1048576
+  terminal_chunk_max_bytes: 32768
+  event_delivery: at_least_once_with_seq_dedupe
+standard_errors:
+  - INVALID_SCHEMA
+  - INCOMPATIBLE_PROTOCOL
+  - VERSION_CONFLICT
+  - ACCESS_DENIED
+  - NOT_IMPLEMENTED
+  - NOT_FOUND
+  - PROVIDER_AUTH_REQUIRED
+  - MISSING_PROVIDER
+  - LEASE_CONFLICT
+  - EVIDENCE_MISSING
+  - CONTRACT_DRIFT
+  - GIT_CONFLICT
+methods:
+  - name: health.get
+    permission: public_local
+    params: {}
+    result: {healthy: boolean, daemon_version: string, api_version: integer}
+  - name: system.capabilities
+    permission: ui_or_cli
+    params: {}
+    result: {platform: string, providers: array, daemon_mode: string}
+  - name: project.create
+    permission: owner
+    mutation: true
+    params: {canonical_path: string, display_name: string}
+    result: {project_id: string, version: integer}
+  - name: project.list
+    permission: ui_or_cli
+    params: {}
+    result: {projects: array}
+  - name: project.open
+    permission: ui_or_cli
+    params: {project_id: string}
+    result: {project: object, latest_run_id: nullable_string}
+  - name: run.create
+    permission: owner
+    mutation: true
+    params: {project_id: string, workflow_id: string, workflow_version: integer}
+    result: {run_id: string, version: integer}
+  - name: run.status
+    permission: ui_or_cli
+    params: {run_id: string}
+    result: {run: object}
+  - name: run.pause
+    permission: owner
+    mutation: true
+    params: {run_id: string, expected_version: integer, reason: string}
+    result: {run_id: string, state: string, version: integer}
+  - name: run.resume
+    permission: owner
+    mutation: true
+    params: {run_id: string, expected_version: integer}
+    result: {run_id: string, state: string, version: integer}
+  - name: workflow.get
+    permission: ui_or_cli
+    params: {run_id: string}
+    result: {workflow: object, phase: object, gate: object}
+  - name: workflow.gate.approve
+    permission: owner
+    mutation: true
+    params: {run_id: string, phase_id: string, expected_version: integer, artifact_hashes: array}
+    result: {gate_id: string, approved_phase: string, next_phase: string, version: integer}
+  - name: workflow.gate.request_changes
+    permission: owner
+    mutation: true
+    params: {run_id: string, phase_id: string, expected_version: integer, notes: string}
+    result: {gate_id: string, state: string, version: integer}
+  - name: task.list
+    permission: project_read
+    params: {run_id: string, status: nullable_string}
+    result: {tasks: array}
+  - name: task.get
+    permission: project_read
+    params: {run_id: string, task_id: string}
+    result: {task: object}
+  - name: task.create
+    permission: coordinator
+    mutation: true
+    params: {run_id: string, task: object}
+    result: {task_id: string, version: integer}
+  - name: task.report
+    permission: task_worker
+    mutation: true
+    params: {report: task_report_v1}
+    result: {report_id: string, task_state: string, task_version: integer}
+  - name: task.cancel
+    permission: owner_or_coordinator
+    mutation: true
+    params: {run_id: string, task_id: string, expected_version: integer, reason: string}
+    result: {task_id: string, state: string, version: integer}
+  - name: session.spawn
+    permission: coordinator_or_owner
+    mutation: true
+    params: {run_id: string, task_id: nullable_string, provider: string, role: string, packet_path: string, cols: integer, rows: integer}
+    result: {session_id: string, lifecycle_state: string}
+  - name: session.list
+    permission: project_read
+    params: {run_id: string}
+    result: {sessions: array}
+  - name: session.attach
+    permission: project_read
+    params: {session_id: string, since_seq: integer}
+    result: {session: object, events: array, live_cursor: integer}
+  - name: session.input
+    permission: session_controller
+    mutation: true
+    params: {session_id: string, input_b64: string, control_token: string}
+    result: {accepted_bytes: integer}
+  - name: session.resize
+    permission: session_controller
+    mutation: true
+    params: {session_id: string, cols: integer, rows: integer, control_token: string}
+    result: {cols: integer, rows: integer}
+  - name: session.stop
+    permission: coordinator_or_owner
+    mutation: true
+    params: {session_id: string, graceful_timeout_ms: integer}
+    result: {session_id: string, state: string}
+  - name: memory.query
+    permission: project_read
+    params: {project_id: string, task_id: nullable_string, query: string, scopes: array, limit: integer, include_candidates: boolean}
+    result: {items: array, index_revision: string}
+  - name: memory.propose
+    permission: task_worker_or_coordinator
+    mutation: true
+    params: {candidate: memory_item_v1}
+    result: {memory_id: string, status: string}
+  - name: memory.promote
+    permission: owner_or_validator
+    mutation: true
+    params: {memory_id: string, evidence_id: string, expected_version: integer}
+    result: {memory_id: string, status: string, version: integer}
+  - name: memory.reject
+    permission: owner_or_validator
+    mutation: true
+    params: {memory_id: string, reason: string, expected_version: integer}
+    result: {memory_id: string, status: string, version: integer}
+  - name: handoff.create
+    permission: task_worker_or_coordinator
+    mutation: true
+    params: {handoff: handoff_v1}
+    result: {handoff_id: string, status: string}
+  - name: handoff.accept
+    permission: task_worker_or_coordinator
+    mutation: true
+    params: {handoff_id: string}
+    result: {handoff_id: string, status: string}
+  - name: contract.get
+    permission: project_read
+    params: {project_id: string, contract_id: string, version: string}
+    result: {contract: object, schema_sha256: string}
+  - name: contract.validate
+    permission: coordinator_or_validator
+    params: {project_id: string, contract_id: string, version: string, artifact_path: string}
+    result: {valid: boolean, findings: array}
+  - name: review.submit
+    permission: reviewer
+    mutation: true
+    params: {verdict: review_verdict_v1}
+    result: {review_id: string, accepted: boolean}
+  - name: test.submit
+    permission: tester
+    mutation: true
+    params: {verdict: test_verdict_v1}
+    result: {test_id: string, accepted: boolean}
+  - name: git.preview
+    permission: project_read
+    params: {run_id: string, task_id: string, operation: string}
+    result: {before_sha: string, proposed_operations: array, risks: array}
+  - name: git.integrate
+    permission: coordinator_only
+    mutation: true
+    params: {run_id: string, task_id: string, expected_version: integer, review_id: string, test_id: string}
+    result: {git_operation_id: string, integrated_sha: string, status: string}
+  - name: git.finish
+    permission: owner
+    mutation: true
+    params: {run_id: string, choice: string, target_branch: nullable_string, approval_id: string}
+    result: {git_operation_id: string, outcome: string}
+event_kinds:
+  - project.created
+  - run.created
+  - run.paused
+  - run.resumed
+  - workflow.gate_requested
+  - workflow.gate_approved
+  - workflow.gate_revision_requested
+  - workflow.phase_started
+  - workflow.phase_skipped
+  - task.created
+  - task.status_changed
+  - task.blocked
+  - task.report_accepted
+  - session.started
+  - session.output
+  - session.output_gap
+  - session.exited
+  - session.interrupted
+  - memory.candidate_created
+  - memory.promoted
+  - memory.rejected
+  - handoff.created
+  - handoff.accepted
+  - contract.approved
+  - contract.drift_detected
+  - review.submitted
+  - test.submitted
+  - git.operation_planned
+  - git.operation_completed
+  - git.operation_failed

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "project_id": "p_demo",
+  "run_id": "r_demo",
+  "task_id": "BE-014",
+  "session_id": "s_backend_1",
+  "report_id": "report_BE-014_01",
+  "result": "handoff_submitted",
+  "summary": "Implemented login route using frozen AUTH 1.0.0 contract",
+  "changed_files": [
+    "src/server/auth/login.ts",
+    "tests/server/auth/login.test.ts"
+  ],
+  "evidence": [
+    {
+      "command": "npm test -- auth",
+      "exit_code": 0,
+      "started_at": "2026-10-13T14:31:00Z",
+      "finished_at": "2026-10-13T14:31:04Z",
+      "artifact_path": ".weave/evidence/BE-014-test.log",
+      "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "platform": "windows-x64",
+      "revision": "worktree-BE-014"
+    }
+  ],
+  "contract_pins": [
+    {
+      "contract_id": "AUTH",
+      "version": "1.0.0",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "blockers": [],
+  "memory_candidates": [
+    "JWT response shape follows AUTH 1.0.0 approved schema"
+  ],
+  "submitted_at": "2026-10-13T14:32:00Z"
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "font": {"ui": "Inter, ui-sans-serif, system-ui, sans-serif", "mono": "JetBrains Mono, ui-monospace, Consolas, monospace", "body_px": 13, "body_line_px": 20, "heading_px": 16, "caption_px": 11},
+  "spacing_px": [4, 8, 12, 16, 24, 32],
+  "radius_px": {"control": 6, "panel": 10},
+  "layout_px": {"header": 52, "tasks_sidebar": 264, "inspector": 340, "timeline": 144, "terminal_min_width": 520},
+  "color_dark": {
+    "canvas": "#0D1017", "surface": "#151B24", "raised": "#1C2431", "inset": "#10151D",
+    "border": "#2A3445", "text": "#E8EEF7", "text_secondary": "#C4CEDC", "text_muted": "#9AA8BC",
+    "accent": "#82B7FF", "selected": "#213952", "success": "#52C5A3", "warning": "#F5C36A",
+    "danger": "#F07777", "running": "#91A8FF", "idle": "#90A0B4"
+  }
+}

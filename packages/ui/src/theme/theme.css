@@ -1,0 +1,96 @@
+/* WEAVE Theme Design Tokens: Accessible Dark and Light Schemes */
+
+:root {
+  --weave-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --weave-font-mono: ui-monospace, SFMono-Regular, "Cascadia Code", "Consolas", monospace;
+
+  /* Focus ring tokens - minimum 2px with high contrast offset */
+  --weave-focus-ring: #2563eb;
+  --weave-focus-offset: #ffffff;
+
+  /* Light Theme Defaults */
+  --weave-bg-canvas: #f8fafc;
+  --weave-bg-surface: #ffffff;
+  --weave-bg-surface-elevated: #f1f5f9;
+  --weave-bg-surface-active: #e2e8f0;
+  --weave-bg-muted: #e2e8f0;
+
+  --weave-border-subtle: #e2e8f0;
+  --weave-border-default: #cbd5e1;
+  --weave-border-strong: #94a3b8;
+
+  --weave-text-primary: #0f172a;
+  --weave-text-secondary: #475569;
+  --weave-text-muted: #64748b;
+  --weave-text-inverse: #ffffff;
+
+  --weave-accent-primary: #0284c7;
+  --weave-accent-hover: #0369a1;
+  --weave-accent-text: #ffffff;
+
+  --weave-status-ready: #0369a1;
+  --weave-status-ready-bg: #e0f2fe;
+  --weave-status-running: #d97706;
+  --weave-status-running-bg: #fef3c7;
+  --weave-status-done: #15803d;
+  --weave-status-done-bg: #dcfce7;
+  --weave-status-blocked: #b91c1c;
+  --weave-status-blocked-bg: #fee2e2;
+  --weave-status-unavailable: #64748b;
+  --weave-status-unavailable-bg: #f1f5f9;
+}
+
+[data-theme="dark"],
+:root.dark {
+  --weave-focus-ring: #38bdf8;
+  --weave-focus-offset: #090d16;
+
+  /* Dark Theme */
+  --weave-bg-canvas: #090d16;
+  --weave-bg-surface: #0f172a;
+  --weave-bg-surface-elevated: #1e293b;
+  --weave-bg-surface-active: #334155;
+  --weave-bg-muted: #1e293b;
+
+  --weave-border-subtle: #1e293b;
+  --weave-border-default: #334155;
+  --weave-border-strong: #475569;
+
+  --weave-text-primary: #f8fafc;
+  --weave-text-secondary: #cbd5e1;
+  --weave-text-muted: #94a3b8;
+  --weave-text-inverse: #0f172a;
+
+  --weave-accent-primary: #38bdf8;
+  --weave-accent-hover: #7dd3fc;
+  --weave-accent-text: #090d16;
+
+  --weave-status-ready: #38bdf8;
+  --weave-status-ready-bg: rgba(56, 189, 248, 0.15);
+  --weave-status-running: #fbbf24;
+  --weave-status-running-bg: rgba(251, 191, 36, 0.15);
+  --weave-status-done: #4ade80;
+  --weave-status-done-bg: rgba(74, 222, 128, 0.15);
+  --weave-status-blocked: #f87171;
+  --weave-status-blocked-bg: rgba(248, 113, 113, 0.15);
+  --weave-status-unavailable: #94a3b8;
+  --weave-status-unavailable-bg: rgba(148, 163, 184, 0.15);
+}
+
+/* Base Accessibility Rules */
+*:focus-visible {
+  outline: 2px solid var(--weave-focus-ring) !important;
+  outline-offset: 2px !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

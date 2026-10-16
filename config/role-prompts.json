@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "roles": {
+    "orchestrator": ["prompts/ORCHESTRATOR.md"],
+    "researcher": ["prompts/RESEARCHER.md"],
+    "ui_designer": ["prompts/DESIGNER.md"],
+    "frontend": ["prompts/CODING_AGENT.md", "prompts/FRONTEND.md"],
+    "backend": ["prompts/CODING_AGENT.md", "prompts/BACKEND.md"],
+    "database": ["prompts/CODING_AGENT.md", "prompts/DATABASE.md"],
+    "reviewer": ["prompts/REVIEWER.md", "prompts/INTEGRATION_CHECKS.md"],
+    "tester": ["prompts/TESTER.md", "prompts/INTEGRATION_CHECKS.md"],
+    "browser_qa": ["prompts/TESTER.md", "prompts/BROWSER_QA.md", "prompts/INTEGRATION_CHECKS.md"]
+  }
+}

@@ -1,0 +1,7 @@
+Coordinator review follow-up for your INF-001 desktop contribution. Continue the same Antigravity conversation. Edit only `apps/desktop/**` and `packages/ui/**`; do not touch docs, crates, Git, or spawn agents.
+
+Material contract mismatch: `packages/ui/src/components/PhaseWorkflowBar.tsx` default phase IDs, names, order, and approval flags do not match `workflow/mastermind.yaml`. Read that file as data and make the default proposed phase list exactly correspond to canonical IDs and names in order: `0` Setup (approval false), `1` Discovery, `2` PRD, `3` Feature Specs, `4` Implementation Plan, `5` API Record, `6` Design System, `7` HTML Mockups, `7.5` HTML-to-React (conditional and approval false), `8` Build and Verify, `9` Wrap and Finish. Phases 1-7 and 8-9 require approval. Use ID `0` as the default selected ID. Keep all bootstrap statuses proposed, with no live progress implied.
+
+Remove the nonexistent `WF-002` reference in the gate-disabled copy; `workflow/tasks.yaml` only defines WF-001. Review the bootstrap task cards against exact IDs and write scopes in `workflow/tasks.yaml`; correct mismatches or omit claimed write scopes from the non-live preview. Do not claim these tasks are assigned, running, or approved.
+
+Run available formatting/type checks within your sandbox and report exact command, timestamp, exit code, output artifact and any network permission blocker. Return exact changed files and remaining risks. Do not modify canonical specs or invent workflow IDs.

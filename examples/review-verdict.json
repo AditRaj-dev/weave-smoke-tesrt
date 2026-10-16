@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "review_id": "review_BE_014",
+  "task_id": "BE-014",
+  "reviewer_session_id": "s_reviewer_1",
+  "implementer_session_id": "s_backend_1",
+  "diff_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "verdict": "PASS",
+  "findings": [],
+  "reviewed_contracts": [
+    {
+      "contract_id": "AUTH",
+      "version": "1.0.0",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "submitted_at": "2026-10-13T14:34:00Z"
+}

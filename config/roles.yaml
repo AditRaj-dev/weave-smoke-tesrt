@@ -1,0 +1,127 @@
+schema_version: 1
+roles:
+- id: orchestrator
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - task.create
+  - workflow.gate.request
+  - contract.show
+  workspace_policy: documents_and_policy
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: researcher
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - code.find
+  - research.web
+  - memory.propose
+  workspace_policy: research_only
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: ui_designer
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - design.preview
+  - memory.propose
+  - task.report
+  workspace_policy: design_workspace
+  provider_preferences:
+  - claude
+  - gemini
+  - codex
+  git_mutations_allowed: false
+- id: frontend
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - contract.show
+  - code.find
+  - task.report
+  - memory.propose
+  workspace_policy: worktree_scoped_write
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: backend
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - contract.show
+  - code.find
+  - task.report
+  - memory.propose
+  workspace_policy: worktree_scoped_write
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: database
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - contract.show
+  - code.find
+  - task.report
+  workspace_policy: worktree_scoped_write
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: reviewer
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - contract.show
+  - code.find
+  - review.submit
+  workspace_policy: read_only_diff
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: tester
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - contract.show
+  - test.submit
+  workspace_policy: test_sandbox
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+- id: browser_qa
+  execution: llm_pty
+  allowed_tool_capabilities:
+  - memory.query
+  - browser.run
+  - test.submit
+  workspace_policy: browser_test_sandbox
+  provider_preferences:
+  - claude
+  - codex
+  - gemini
+  git_mutations_allowed: false
+deterministic_services:
+- task_scheduler
+- memory_store
+- contract_manager
+- git_broker
+- code_indexer
+note: Roles are configurable capabilities, not fixed model names. Never spawn always-on
+  LLM for deterministic services.

@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: WEAVE Demo Auth Contract
+  version: 1.0.0
+  description: >-
+    Test fixture only. This endpoint is NOT a WEAVE daemon endpoint and is NOT
+    permission to implement auth in the actual WEAVE app.
+paths:
+  /api/auth/login:
+    post:
+      operationId: authLogin
+      summary: Demo login endpoint for parallel FE/BE contract acceptance test
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      additionalProperties: false
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+    LoginResponse:
+      type: object
+      additionalProperties: false
+      required: [accessToken, expiresIn]
+      properties:
+        accessToken: {type: string}
+        expiresIn: {type: integer, minimum: 1}
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code: {type: string}
+        message: {type: string}

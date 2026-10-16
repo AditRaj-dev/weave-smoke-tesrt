@@ -1,0 +1,9 @@
+# Tauri and Node build artifacts
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Tauri output
+src-tauri/target/
+src-tauri/gen/

@@ -1,0 +1,16 @@
+{
+  "api_version": 1,
+  "event_id": "e_00001",
+  "seq": 1,
+  "kind": "task.status_changed",
+  "project_id": "p_demo",
+  "run_id": "r_demo",
+  "task_id": "BE-014",
+  "session_id": "s_backend_1",
+  "ts": "2026-10-13T14:30:00Z",
+  "payload": {
+    "from": "assigned",
+    "to": "running",
+    "task_version": 4
+  }
+}

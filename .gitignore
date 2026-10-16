@@ -1,0 +1,12 @@
+**/target/
+**/node_modules/
+**/dist/
+**/__pycache__/
+.weave/
+docs/parallel-agents/agy-runs/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*

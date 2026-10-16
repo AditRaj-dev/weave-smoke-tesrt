@@ -1,0 +1,10 @@
+Coordinator review of your INF-001 desktop contribution. Edit only `apps/desktop/**` and `packages/ui/**`. Do not spawn agents, change docs/crates/Git, or claim task acceptance.
+
+Please fix these material findings after inspecting your final files:
+1. The bootstrap shell currently hardcodes `INF-001` as running with an assigned session, a fake run ID, several workflow phases as approved, and contract schemas as approved. No daemon/event stream exists yet and the specs are proposed. Remove these fabricated live/approved states. Default to honest empty/unavailable/proposed views; any example data must be clearly labeled as non-live and must never appear as actual progress.
+2. `PhaseWorkflowBar` renders Approve Gate and Request Changes even when no callbacks exist; these are dead controls. Hide or disable actions until real handlers and validated daemon state are available. Audit other controls similarly. Keep keyboard accessibility and dark/light behavior.
+3. `tauri.conf.json` uses `beforeDevCommand: npm run build` while `devUrl` expects a Vite server. Wire the actual dev server command correctly or remove that dev URL until supported. Remove unused shell plugin/permissions if unnecessary. Verify Tauri config against installed Tauri 2 types or official docs.
+4. The Tauri `check_daemon_status()` command currently always returns `connected: false` and a hardcoded endpoint, so it is not a real status check. Remove or rename it to explicit bootstrap metadata; do not expose a fabricated/private endpoint path or imply a connection was probed.
+5. Keep this as an M0 shell, not an F08 mock cockpit that implies completed implementation. Terminal unavailability must remain explicit. Generate a lockfile within your scope if package installation succeeds. Run typecheck/build and native cargo check where available, with exact command/time/exit/artifact evidence. If a command is permission-denied, report that and leave it for coordinator verification.
+
+Return exact changed files, evidence, versions/signatures, contracts, blockers and risks. Do not silently change canonical specs or invent endpoints.

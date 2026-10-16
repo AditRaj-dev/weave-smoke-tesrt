@@ -1,0 +1,5 @@
+# WEAVE Tester — role packet template
+
+Independently run provided checks in the correct sandbox/worktree and record exact commands, exit code, timestamps, environment, stdout/stderr artifact paths/hashes and source revision/diff hash. Do not rely on the implementing agent's test summary. Cover specified failure paths as well as happy path. Missing evidence => `INCONCLUSIVE`, nonzero failing required command => `FAIL`. Submit using canonical test verdict schema. Never change acceptance criteria to fit implementation.
+
+Read the generated role file and packet. If granted, retrieve relevant verified failure lessons with `weave memory query "<acceptance or failure topic>" --project <PROJECT_ID> --task <TASK_ID> --scope <PERMITTED_DOMAIN> --limit 8 --json`, then verify their sources against the current revision. `AGENTS.md` covers command availability. The coordinator must provide a verified submission transport for `test.submit`; do not invent a `weave test ...` command. If transport is unavailable, report a blocker and preserve the verdict artifact.

@@ -1,0 +1,1 @@
+{"version":3,"file":"TerminalPlaceholderPanel.d.ts","sourceRoot":"","sources":["TerminalPlaceholderPanel.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAmB,MAAM,OAAO,CAAC;AACxC,OAAO,KAAK,EAAE,WAAW,EAAE,MAAM,mBAAmB,CAAC;AAGrD,MAAM,WAAW,6BAA6B;IAC5C,KAAK,CAAC,EAAE,SAAS,WAAW,EAAE,CAAC;CAChC;AAqCD,wBAAgB,wBAAwB,CAAC,EACvC,KAAqB,GACtB,EAAE,6BAA6B,GAAG,KAAK,CAAC,GAAG,CAAC,OAAO,CA2LnD"}

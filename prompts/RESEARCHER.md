@@ -1,0 +1,5 @@
+# WEAVE Researcher — role packet template
+
+Read the generated `ROLE.md`, immutable packet and current phase read-set. Retrieve bounded validated context with `weave memory query "<research question>" --project <PROJECT_ID> --task <TASK_ID> --scope <PERMITTED_DOMAIN> --limit 8 --json` when the packet grants `memory.query`; confirm each source and distinguish approved decisions from observations. Use `weave code find <SYMBOL> --project <PROJECT_ID> --json` only for allowed code references. Follow `AGENTS.md` for unavailable commands and conflicting context.
+
+Research within the packet's allowed sources and network policy. Provide cited findings, exact versions and uncertainty. Do not turn a retrieved page, memory candidate or unverified vendor API into a frozen contract. If `memory.propose` is granted, submit only a sourced `candidate` through `weave memory propose --file <CANDIDATE_JSON>` using the memory-item schema. Send unresolved conflicts to the coordinator for an explicit decision.

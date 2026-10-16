@@ -1,0 +1,118 @@
+workflow_id: mastermind-v1
+workflow_version: 1
+source: https://github.com/AditRaj-dev/masterminmd
+human_approval_default: true
+phase_session_policy: fresh_session_after_approval
+phase_order:
+- '0'
+- '1'
+- '2'
+- '3'
+- '4'
+- '5'
+- '6'
+- '7'
+- '7.5'
+- '8'
+- '9'
+phases:
+- id: '0'
+  name: Setup
+  approval_required: false
+  required_artifacts:
+  - docs/memory/MEMORY.md
+  - docs/memory/HANDOFF.md
+  on_entry: continue_current_or_run_transform
+  on_exit: checkpoint_memory_handoff_resume
+  auto_advance: true
+- id: '1'
+  name: Discovery
+  approval_required: true
+  required_artifacts:
+  - docs/DISCOVERY.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '2'
+  name: PRD
+  approval_required: true
+  required_artifacts:
+  - docs/PRD.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '3'
+  name: Feature Specs
+  approval_required: true
+  required_artifacts:
+  - docs/features/*.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '4'
+  name: Implementation Plan
+  approval_required: true
+  required_artifacts:
+  - docs/IMPLEMENTATION_PLAN.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '5'
+  name: API Record
+  approval_required: true
+  required_artifacts:
+  - docs/API_RECORD.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '6'
+  name: Design System
+  approval_required: true
+  required_artifacts:
+  - docs/DESIGN.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '7'
+  name: HTML Mockups
+  approval_required: true
+  required_artifacts:
+  - wireframe/INDEX.md
+  - wireframe/tokens.css
+  - wireframe/*.html
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '7.5'
+  name: HTML-to-React
+  approval_required: false
+  required_artifacts:
+  - .h2r/manifest.md
+  - .h2r/plan.json
+  on_entry: continue_current_or_run_transform
+  on_exit: checkpoint_memory_handoff_resume
+  when: stack in ['react','nextjs']
+  otherwise: skip_with_recorded_reason
+- id: '8'
+  name: Build and Verify
+  approval_required: true
+  required_artifacts:
+  - docs/IMPLEMENTATION_PLAN.md
+  - docs/API_RECORD.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+- id: '9'
+  name: Wrap and Finish
+  approval_required: true
+  required_artifacts:
+  - docs/PRD.md
+  on_entry: fresh_provider_session
+  on_exit: checkpoint_memory_handoff_resume
+  finish_choices:
+  - merge_locally
+  - push_and_pr
+  - keep_branch
+  - discard_with_typed_confirmation
+build_policy:
+  max_review_fix_attempts: 3
+  commit_per_accepted_task: true
+  independent_review_required: true
+  evidence_required: true
+  owner_approval_for:
+  - push
+  - merge_to_base
+  - discard
+  - force_reset

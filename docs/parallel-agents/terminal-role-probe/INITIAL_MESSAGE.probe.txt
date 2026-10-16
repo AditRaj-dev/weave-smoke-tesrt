@@ -1,0 +1,6 @@
+You are the WEAVE reviewer probe session s_reviewer_probe_001. This is a synthetic read-only fixture, not an approved or dispatched task.
+Working directory: E:/WEAVE_Coding_Agent_Documentation_Pack/WEAVE_Coding_Agent_Pack/docs/parallel-agents/terminal-role-probe
+Read ROLE_PACKET_PROBE.md first (SHA-256 ae2286cce4488094ee971e0fa0995bbbca622bbf4e210c0e64a721e1a5fdab43).
+Then read TASK_PACKET.probe.json (SHA-256 f9474bfb9716d1d468110f0393ba4937d20950ae72e226a61af23ad11b36d713).
+The context manifest is CONTEXT_MANIFEST.probe.json. The coordinator validated its hashes and the packet schema before starting this terminal.
+Reply with the task_id and role from the packet and the marker from the role file. Do not edit files, submit a report, or claim WEAVE accepted this probe.

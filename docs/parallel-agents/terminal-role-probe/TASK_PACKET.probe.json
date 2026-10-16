@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project_id": "p_weave_probe",
+  "run_id": "r_terminal_probe",
+  "task_id": "PROBE-ROLE-001",
+  "session_id": "s_reviewer_probe_001",
+  "packet_version": 1,
+  "role": "reviewer",
+  "provider": "codex",
+  "phase_id": "8",
+  "cwd": "E:/WEAVE_Coding_Agent_Documentation_Pack/WEAVE_Coding_Agent_Pack/docs/parallel-agents/terminal-role-probe",
+  "worktree": "E:/WEAVE_Coding_Agent_Documentation_Pack/WEAVE_Coding_Agent_Pack/docs/parallel-agents/terminal-role-probe",
+  "feature_spec": "docs/features/F05-PROVIDER-ADAPTERS.md",
+  "dependencies": [],
+  "scopes": {
+    "read_paths": [
+      "docs/parallel-agents/terminal-role-probe/**",
+      "docs/features/F05-PROVIDER-ADAPTERS.md"
+    ],
+    "write_paths": [],
+    "resources": []
+  },
+  "memory_scopes": [],
+  "contracts": [],
+  "acceptance_criteria": [
+    "Read the role file and report the packet's task_id, role, and marker without writing files"
+  ],
+  "verification_commands": [],
+  "tool_permissions": [],
+  "report_destination": "docs/parallel-agents/terminal-role-probe/NOT_SUBMITTED.probe.json",
+  "created_at": "2026-10-16T12:09:04Z",
+  "isolation_mode": "cooperative"
+}

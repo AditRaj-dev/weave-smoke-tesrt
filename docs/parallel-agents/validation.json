@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-16T03:34:00.2455986+05:30",
+  "result": "PASS",
+  "files": [
+    {
+      "file": "M0-foundation.md",
+      "ids": 6,
+      "sha256": "3DFC01E718095F23BE6532B35FCF9E18E096CB65F6F4381BA5FC28DDA2246648"
+    },
+    {
+      "file": "M1-coordination.md",
+      "ids": 6,
+      "sha256": "0B9CD431512D36B4F9163AF3EC597117EF2529ECB83A7F09D587BC9FB166A2F0"
+    },
+    {
+      "file": "M2-verification.md",
+      "ids": 6,
+      "sha256": "6EA30C0164AE4619390876B2E9D60BE794D2495FA9BD405A84B61EC49D25C929"
+    }
+  ],
+  "forbidden_flag_matches": 0
+}

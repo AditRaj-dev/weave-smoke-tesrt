@@ -1,0 +1,50 @@
+[
+  {
+    "command": "C:\\Python314\\python.exe -m unittest discover -s tests -p test_render_agent_bundle.py",
+    "started_at": "2026-10-16T12:31:19.632252+00:00",
+    "finished_at": "2026-10-16T12:31:41.330046+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 19.397s\n\nOK\n"
+  },
+  {
+    "command": "C:\\Python314\\python.exe tests/validate_pack.py",
+    "started_at": "2026-10-16T12:31:41.330375+00:00",
+    "finished_at": "2026-10-16T12:31:42.848983+00:00",
+    "exit_code": 0,
+    "stdout": "Checked 6 example/schema pairs, 22 tasks, 11 workflow phases, required docs\nPASS: package structure, JSON schemas/example fixtures, workflow, DAG dependencies\n",
+    "stderr": ""
+  },
+  {
+    "command": "C:\\Python314\\python.exe scripts/validate_contracts.py",
+    "started_at": "2026-10-16T12:31:42.849117+00:00",
+    "finished_at": "2026-10-16T12:31:43.495845+00:00",
+    "exit_code": 0,
+    "stdout": "PASS: 3 OpenAPI operations, 2 mapped features; versions, mappings and local refs consistent\nNOTE: Run full OpenAPI lint, type generation, runtime conformance and E2E checks separately.\n",
+    "stderr": ""
+  },
+  {
+    "command": "E:\\WEAVE_Coding_Agent_Documentation_Pack\\WEAVE_Coding_Agent_Pack\\crates\\target\\debug\\weave.exe --help",
+    "started_at": "2026-10-16T12:31:43.495986+00:00",
+    "finished_at": "2026-10-16T12:31:43.568893+00:00",
+    "exit_code": 0,
+    "stdout": "WEAVE CLI 0.1.0\nUsage:\n  weave status --json\n  weave project create <path> --name <name> --json\n  weave project list --json\n  weave memory query <text> --project <id> [--task <id>] [--scope <domain>] [--limit 1..8] --json\n  weave memory propose --file <candidate.json>\n  weave memory promote <id> --evidence <id> --json\n  weave memory reject <id> --reason <text> --json\n  weave mem search <text> --project <id> [--scope <domain>] --json\nOther planned commands return NOT_IMPLEMENTED.\n",
+    "stderr": ""
+  },
+  {
+    "command": "C:\\Python314\\python.exe -c \"import importlib.metadata, inspect, jsonschema; print(importlib.metadata.version('jsonschema')); print(inspect.signature(jsonschema.Draft202012Validator.validate)); print(inspect.signature(jsonschema.FormatChecker))\"",
+    "started_at": "2026-10-16T12:31:43.569032+00:00",
+    "finished_at": "2026-10-16T12:31:44.624260+00:00",
+    "exit_code": 0,
+    "stdout": "4.26.0\n(self, *args, **kwargs)\n(formats: 'typing.Iterable[str] | None' = None)\n",
+    "stderr": ""
+  },
+  {
+    "command": "C:\\Python314\\python.exe -m unittest discover -s tests -p test_render_agent_bundle.py",
+    "started_at": "2026-10-16T12:33:44.199389+00:00",
+    "finished_at": "2026-10-16T12:34:22.789073+00:00",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 35.655s\n\nOK\n"
+  }
+]

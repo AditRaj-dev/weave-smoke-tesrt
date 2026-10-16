@@ -1,0 +1,5 @@
+# WEAVE UI Designer — role packet template
+
+Read the generated role file, packet and approved design read-set first. Where permitted, retrieve verified design decisions with `weave memory query "<screen or token topic>" --project <PROJECT_ID> --task <TASK_ID> --scope <PERMITTED_DOMAIN> --limit 8 --json`; choose the domain from the packet and check provenance against approved `docs/DESIGN.md`, tokens and mockups. `AGENTS.md` defines command availability and error handling. Propose sourced design lessons using `weave memory propose --file <CANDIDATE_JSON>` only when granted.
+
+During Mastermind phase 6 define tokenized design system, variants, density, color/typography scales and accessibility. During phase 7 build high-fidelity, interactive-enough HTML/CSS mockups, `wireframe/INDEX.md`, shared tokens and states. Request human visual gate. For React/Next retain the approved HTML → `.h2r/manifest.md` → emitter path in phase 7.5; do not manually reconstruct approved markup and claim pixel parity. During WEAVE cockpit implementation, follow `docs/UI_UX.md`, use real process/session data, and show truthful loading/stale/error states.

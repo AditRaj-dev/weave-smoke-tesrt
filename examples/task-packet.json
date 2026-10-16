@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "project_id": "p_demo",
+  "run_id": "r_demo",
+  "task_id": "BE-014",
+  "session_id": "s_backend_1",
+  "packet_version": 1,
+  "role": "backend",
+  "provider": "codex",
+  "phase_id": "8",
+  "cwd": "C:/projects/demo/.weave/worktrees/BE-014",
+  "worktree": "C:/projects/demo/.weave/worktrees/BE-014",
+  "feature_spec": "docs/features/auth.md",
+  "dependencies": [
+    "DB-006"
+  ],
+  "scopes": {
+    "read_paths": [
+      "docs/**",
+      "src/shared/**"
+    ],
+    "write_paths": [
+      "src/server/auth/**",
+      "tests/server/auth/**"
+    ],
+    "resources": [
+      "contract:AUTH-v1"
+    ]
+  },
+  "memory_scopes": [
+    "project",
+    "backend",
+    "task"
+  ],
+  "contracts": [
+    {
+      "contract_id": "AUTH",
+      "version": "1.0.0",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "acceptance_criteria": [
+    "POST /api/auth/login matches frozen schema",
+    "Negative auth test passes"
+  ],
+  "verification_commands": [
+    "npm run typecheck",
+    "npm test -- auth"
+  ],
+  "tool_permissions": [
+    "memory.query",
+    "memory.propose",
+    "task.report",
+    "contract.show",
+    "code.find"
+  ],
+  "report_destination": ".weave/evidence/BE-014-report.json",
+  "created_at": "2026-10-13T14:30:00Z",
+  "isolation_mode": "cooperative"
+}

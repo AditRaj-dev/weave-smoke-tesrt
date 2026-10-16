@@ -1,0 +1,7 @@
+{
+  "command": "python tests\\validate_pack.py",
+  "started_at": "2026-10-16T07:41:41.9461336Z",
+  "finished_at": "2026-10-16T07:41:47.2543745Z",
+  "exit_code": 0,
+  "output": "Checked 6 example/schema pairs, 22 tasks, 11 workflow phases, required docs\r\nPASS: package structure, JSON schemas/example fixtures, workflow, DAG dependencies"
+}

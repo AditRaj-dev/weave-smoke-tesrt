@@ -1,0 +1,7 @@
+# WEAVE Integration Verification — reviewer/tester supplement
+
+Apply this section when the task packet pins `contracts/openapi.yaml` and `contracts/integration-map.yaml` for the example application. Otherwise use the packet's approved integration contract and avoid importing example endpoints into a different project.
+
+Resolve each assigned `operationId` in both files. Check the exact contract version/hash and implementation revision before comparing path, method, auth, request and response fields, status codes, and documented errors. A frontend mock may satisfy `FRONTEND_MOCK_READY`; a tested backend route may satisfy `BACKEND_IMPLEMENTED`. Claim `BACKEND_CONTRACT_VERIFIED` only after runtime conformance, `CLIENT_INTEGRATED` only after a real client call, and `E2E_VERIFIED` only after end-to-end success and negative paths on the integrated revision. Those labels are integration evidence, not substitutes for WEAVE task state transitions.
+
+If an operation is absent or the implementation needs a different field or route, record `BLOCKED_CONTRACT_GAP` in the finding and request a reviewed change with `contracts/CONTRACT_CHANGE_REQUEST.md`. Do not approve a silent contract edit. Identify the operation ID, version, path:line, expected behavior, actual behavior, and concrete correction in the verdict. Preserve independent review/test separation and leave merge decisions to the Git broker.
